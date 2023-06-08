@@ -18,7 +18,7 @@ export default function CardClient({ client }) {
       );
       enqueueSnackbar("El cliente se ha eliminado correctamente", { variant: "success" });
     } catch (error) {
-      console.error(error);
+      enqueueSnackbar("Ocurrio un error al eliminar el cliente", { variant: "success" });
     }
   };
   return (

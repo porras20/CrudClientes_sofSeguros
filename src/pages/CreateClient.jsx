@@ -98,7 +98,7 @@ export default function CreateClient() {
       await axios.post(`${apiUrl}/users/`, data);
       enqueueSnackbar('Se creo el cliente correctamente', { variant: 'success' })
     } catch (error) {
-      console.log(error);
+      enqueueSnackbar('Ocurrio un error al crear el cliente', { variant: 'error' })
     }
   };
 
