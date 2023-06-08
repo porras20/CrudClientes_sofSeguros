@@ -44,9 +44,9 @@ export default function ListClient() {
           onChange={handleSearch}
         />
         <div className="w-full mt-5 px-5 flex flex-col gap-y-5">
-          {dataClients
+        {dataClients
             .filter(
-              (client) => client.state && client.name.includes(searchValue) || client.fecha_nacimiento.includes(searchValue)
+              (client) => client.state && client.name.includes(searchValue)
             ) // Filtrar por estado y valor de búsqueda en el nombre
             .map((client) => (
               <CardClient client={client} key={client.id} />
