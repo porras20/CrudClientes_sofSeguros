@@ -4,6 +4,7 @@ import axios from "axios";
 import { useSnackbar } from "notistack";
 
 export default function CreateClient() {
+  const apiUrl = import.meta.env.VITE_BACKEND_URL;
   const data = {
     title: "Nuevo cliente",
     urlButton: "/client/list",
@@ -94,7 +95,7 @@ export default function CreateClient() {
 
   const saveClient = async (data) => {
     try {
-      await axios.post("http://127.0.0.1:8000/users/api/v1/users/", data);
+      await axios.post(`${apiUrl}/users/`, data);
       enqueueSnackbar('Se creo el cliente correctamente', { variant: 'success' })
     } catch (error) {
       console.log(error);

@@ -12,6 +12,8 @@ export default function ListClient() {
     textButton: "Nuevo cliente",
   };
 
+  const apiUrl = import.meta.env.VITE_BACKEND_URL;
+
   const handleSearch = (event) => {
     setSearchValue((event.target.value));
   };
@@ -20,7 +22,7 @@ export default function ListClient() {
     const getData = async () => {
       try {
         const response = await axios.get(
-          "http://127.0.0.1:8000/users/api/v1/users/"
+          `${apiUrl}/users/`
         );
         setDataClients(response.data);
       } catch (error) {

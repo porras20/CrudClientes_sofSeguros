@@ -8,12 +8,12 @@ import { useSnackbar } from "notistack";
 export default function CardClient({ client }) {
   const [isOpen, setIsOpen] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
-
+  const apiUrl = import.meta.env.VITE_BACKEND_URL;
   const deleteClient = async (client, id) => {
     client.state = false;
     try {
       await axios.put(
-        `http://127.0.0.1:8000/users/api/v1/users/${id}/`,
+        `${apiUrl}/users/${id}/`,
         client
       );
       enqueueSnackbar("El cliente se ha eliminado correctamente", { variant: "success" });

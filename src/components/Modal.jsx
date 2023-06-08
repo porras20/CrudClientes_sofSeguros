@@ -11,14 +11,15 @@ export default function Modal({ setIsOpen, dataClient }) {
     fecha_nacimiento: dataClient.fecha_nacimiento,
 
   });
-
+  
+  const apiUrl = import.meta.env.VITE_BACKEND_URL;
   const navigate = useNavigate();
   const {enqueueSnackbar} = useSnackbar();
   
   const editClient = async () => {
     try {
       await axios.put(
-        `http://127.0.0.1:8000/users/api/v1/users/${dataClient.id}/`,
+        `${apiUrl}/users/${dataClient.id}/`,
         modalDataClient
       );
       navigate('/');
