@@ -5,10 +5,11 @@ import Modal from "./Modal";
 import axios from "axios";
 import { useSnackbar } from "notistack";
 
-export default function CardClient({ client }) {
+export default function CardClient({ client, setListClientDelete, listClientDelete }) {
   const [isOpen, setIsOpen] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
   const apiUrl = import.meta.env.VITE_BACKEND_URL;
+
   const deleteClient = async (client, id) => {
     client.state = false;
     try {
@@ -16,6 +17,7 @@ export default function CardClient({ client }) {
         `${apiUrl}/users/${id}/`,
         client
       );
+      setListClientDelete([...listClientDelete, { client }])
       enqueueSnackbar("El cliente se ha eliminado correctamente", { variant: "success" });
     } catch (error) {
       enqueueSnackbar("Ocurrio un error al eliminar el cliente", { variant: "error" });

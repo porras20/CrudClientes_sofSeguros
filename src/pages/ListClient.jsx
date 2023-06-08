@@ -6,6 +6,8 @@ import axios from "axios";
 export default function ListClient() {
   const [dataClients, setDataClients] = useState([]);
   const [searchValue, setSearchValue] = useState("");
+  const [listClientDelete, setListClientDelete] = useState([]);
+
   const data = {
     title: "listado de clientes",
     urlButton: "/client/create",
@@ -15,22 +17,20 @@ export default function ListClient() {
   const apiUrl = import.meta.env.VITE_BACKEND_URL;
 
   const handleSearch = (event) => {
-    setSearchValue((event.target.value));
+    setSearchValue(event.target.value);
   };
 
   useEffect(() => {
     const getData = async () => {
       try {
-        const response = await axios.get(
-          `${apiUrl}/users/`
-        );
+        const response = await axios.get(`${apiUrl}/users/`);
         setDataClients(response.data);
       } catch (error) {
         console.log(error);
       }
     };
     getData();
-  }, []);
+  }, [listClientDelete]);
 
   return (
     <>
@@ -44,12 +44,17 @@ export default function ListClient() {
           onChange={handleSearch}
         />
         <div className="w-full mt-5 px-5 flex flex-col gap-y-5">
-        {dataClients
+          {dataClients
             .filter(
               (client) => client.state && client.name.includes(searchValue)
             ) // Filtrar por estado y valor de búsqueda en el nombre
             .map((client) => (
-              <CardClient client={client} key={client.id} />
+              <CardClient
+                client={client}
+                key={client.id}
+                listClientDelete={listClientDelete}
+                setListClientDelete={setListClientDelete}
+              />
             ))}
         </div>
       </div>
